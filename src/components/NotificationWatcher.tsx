@@ -35,34 +35,7 @@ const answerCallback = async (callbackQueryId: string) => {
 
 // ... inside NotificationWatcher component ...
 
-if (data.ok && Array.isArray(data.result)) {
-    for (const update of data.result) {
-        lastUpdateId = Math.max(lastUpdateId, update.update_id);
 
-        // Handle Text Commands
-        if (update.message && update.message.text) {
-            const text = update.message.text.trim().toLowerCase();
-            if (text === "/status" || text === "/ping") {
-                console.log("Received /status command!");
-                await sendStatusReport(false);
-            }
-        }
-
-        // Handle Button Clicks (Callback Query)
-        if (update.callback_query) {
-            const data = update.callback_query.data;
-            const id = update.callback_query.id;
-
-            // Acknowledge the click immediately
-            await answerCallback(id);
-
-            if (data === "/status") {
-                console.log("Received button click!");
-                await sendStatusReport(false);
-            }
-        }
-    }
-}
 
 
 
