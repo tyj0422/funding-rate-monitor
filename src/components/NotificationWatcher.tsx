@@ -64,20 +64,7 @@ if (data.ok && Array.isArray(data.result)) {
     }
 }
 
-// Helper to answer callback query (stop loading circle)
-const answerCallback = async (callbackQueryId: string) => {
-    const token = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-    if (!token) return;
-    try {
-        await fetch(`https://api.telegram.org/bot${token}/answerCallbackQuery`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ callback_query_id: callbackQueryId })
-        });
-    } catch (e) {
-        console.error("Failed to answer callback", e);
-    }
-};
+
 
 export default function NotificationWatcher() {
     const [enabled, setEnabled] = useState(false);
